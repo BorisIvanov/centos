@@ -2,6 +2,9 @@
 yum -y update
 rpm -Uvh http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm         
 yum -y install postgresql93 postgresql93-server postgresql93-libs postgresql93-contrib postgresql93-devel
+rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+yum -y install postgis2_93
+
 service postgresql-9.3 initdb
 service postgresql-9.3 start
 chkconfig --levels 235 postgresql-9.3 on
