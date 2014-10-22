@@ -1,9 +1,16 @@
 #!/bin/bash
 yum -y update
+
+sed -i~ -e '/\[base\]/{:a;n;/^$/!ba;i\exclude=postgresql*' -e '}' /etc/yum.repos.d/CentOS-Base.repo
+sed -i~ -e '/\[updates\]/{:a;n;/^$/!ba;i\exclude=postgresql*' -e '}' /etc/yum.repos.d/CentOS-Base.repo
+
 rpm -Uvh http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm         
 yum -y install postgresql93 postgresql93-server postgresql93-libs postgresql93-contrib postgresql93-devel
+
+#postgis block start
 rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 yum -y install postgis2_93
+#postgis block end
 
 service postgresql-9.3 initdb
 service postgresql-9.3 start
